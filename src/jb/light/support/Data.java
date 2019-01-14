@@ -71,13 +71,13 @@ public class Data {
         int lPeriodSec;
         Statement lStm;
         ResultSet lRes;
-        Setting lInst;
+        Setting lSetting;
         String lSql = "SELECT Longitude, Lattitude, LightOffHour, LightOffMin, OffDuration, SensorLimit, SensorTreshold, MaxSensor, PeriodDark, PeriodMin, PeriodSec "
                 + "FROM Setting "
                 + "WHERE ID = 'Light';";
 
         mText = "";
-        lInst = new Setting();
+        lSetting = new Setting();
         if (mStatus == cOK) {
             try {
                 lStm = mConn.createStatement();
@@ -94,7 +94,7 @@ public class Data {
                     lPeriodDark = lRes.getInt("PeriodDark");
                     lPeriodMinute = lRes.getInt("PeriodMin");
                     lPeriodSec = lRes.getInt("PeriodSec");
-                    lInst = new Setting(lLongitude, lLattitude, lLightOffHour, lLightOffMin, lLightOffPeriod, lSensorLimit, lSensorTreshold, lMaxSensor, lPeriodDark, lPeriodMinute, lPeriodSec);
+                    lSetting = new Setting(lLongitude, lLattitude, lLightOffHour, lLightOffMin, lLightOffPeriod, lSensorLimit, lSensorTreshold, lMaxSensor, lPeriodDark, lPeriodMinute, lPeriodSec);
                 }
                 lRes.close();
                 lStm.close();
@@ -104,7 +104,7 @@ public class Data {
                 xWriteLog("xSetting: SQL error " + mText);
             }
         }
-        return lInst;
+        return lSetting;
     }
 
     public void xChangeSetting(Setting pSetting) {

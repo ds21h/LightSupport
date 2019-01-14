@@ -8,7 +8,7 @@ package jb.light.support;
 /*
  * Synchronise with class Setting in LightControl (Android)
  *
- * Version 12-12-2018
+ * Version 20190113-1
  *
  */
 import org.json.JSONException;
@@ -102,7 +102,7 @@ public class Setting {
                             }
                         }
                     }
-                } catch (NumberFormatException pExc) {
+                } catch (NumberFormatException ignored) {
                 }
             }
         }
@@ -271,7 +271,7 @@ public class Setting {
             lSensor.put(cInterval, lPeriod);
             lSensor.put(cRepeat, mPeriodDark);
             lSetting.put(cSensor, lSensor);
-        } catch (JSONException pExc) {
+        } catch (JSONException ignored) {
         }
 
         return lSetting;
@@ -327,6 +327,7 @@ public class Setting {
         if (lLightOff == null) {
             mLightOffHour = 0;
             mLightOffMin = 0;
+            mLightOffPeriod = 0;
         } else {
             lLight = lLightOff.optString(cPointInTime, "");
             lResult = xLightOff(lLight);
@@ -334,8 +335,8 @@ public class Setting {
                 mLightOffHour = 0;
                 mLightOffMin = 0;
             }
+            mLightOffPeriod = lLightOff.optInt(cPeriod, 0);
         }
-        mLightOffPeriod = lLightOff.optInt(cPeriod, 0);
 
         mSensorLimit = lSensor.optInt(cLimit);
         mSensorTreshold = lSensor.optInt(cTreshold);
