@@ -7,6 +7,9 @@ The project structure is that of NetBeans 8.2.
 
 History:
 
+Version 1.1 - 03-06-2021
+  -   Switched to MariaDB instead of SQLite (only change in connectionstring!)
+
 Version 1.0.1 - 14-01-2019
   -   Missed a Dutch name while renaming. No functional change!
 

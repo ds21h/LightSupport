@@ -34,13 +34,16 @@ public class Data {
         mStatus = cNotSet;
 
         try {
-            Class.forName("org.sqlite.JDBC");
-            mConn = DriverManager.getConnection("jdbc:sqlite:/usr/local/licht/gegevens/Light.db");
+//            Class.forName("org.sqlite.JDBC");
+            Class.forName("org.mariadb.jdbc.Driver");
+//            mConn = DriverManager.getConnection("jdbc:mariadb://192.168.0.98:3306/Light?user=jan&password=Hoepla");
+            mConn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/Light?user=Light&password=Light");
+//            mConn = DriverManager.getConnection("jdbc:sqlite:/usr/local/licht/gegevens/Light.db");
 //            mConn = DriverManager.getConnection("jdbc:sqlite:d:/source/netbeans/lightSupport/light.db");
             mStatus = cOK;
-        } catch (ClassNotFoundException pExc) {
-            mStatus = cSQLite_not_found;
-            xWriteLog("SQLite not found");
+//        } catch (ClassNotFoundException pExc) {
+//            mStatus = cSQLite_not_found;
+//            xWriteLog("SQLite not found");
         } catch (SQLException pExc) {
             xWriteLog("SQLException!");
             mStatus = cSQL_error;
