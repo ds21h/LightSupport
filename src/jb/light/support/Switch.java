@@ -4,7 +4,7 @@ package jb.light.support;
  *
  * Synchronise with class Switch in LightControl (Android)
  *
- * Version 20181212-01
+ * Version 20210607-01
  *
  */
 import org.json.JSONException;

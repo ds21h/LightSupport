@@ -8,7 +8,7 @@ package jb.light.support;
 /*
  * Synchronise with class Setting in LightControl (Android)
  *
- * Version 20190113-1
+ * Version 20210607-01
  *
  */
 import org.json.JSONException;
