@@ -39,10 +39,10 @@ public class Setting {
     private int mLightOffMin;
     private int mLightOffPeriod;
     private int mSensorLimit;
-    private int mSensorTreshold;
-    private int mMaxSensor;
+//    private int mSensorTreshold;
+//    private int mMaxSensor;
     private int mPeriodDark;
-    private int mPeriodMinute;
+//    private int mPeriodMinute;
     private int mPeriodSec;
 
     public double xLongitude() {
@@ -175,34 +175,34 @@ public class Setting {
         }
     }
 
-    public int xSensorTreshold() {
-        return mSensorTreshold;
-    }
+//    public int xSensorTreshold() {
+//        return mSensorTreshold;
+//    }
 
-    public int xSensorTreshold(int pTreshold) {
-        if (pTreshold > 10) {
-            return cResultError;
-        }
-        if (pTreshold < 0) {
-            return cResultError;
-        }
+//    public int xSensorTreshold(int pTreshold) {
+//        if (pTreshold > 10) {
+//            return cResultError;
+//        }
+//        if (pTreshold < 0) {
+//            return cResultError;
+//        }
+//
+//        mSensorTreshold = pTreshold;
+//        return cResultOK;
+//    }
 
-        mSensorTreshold = pTreshold;
-        return cResultOK;
-    }
+//    public int xMaxSensor() {
+//        return mMaxSensor;
+//    }
 
-    public int xMaxSensor() {
-        return mMaxSensor;
-    }
-
-    public int xMaxSensor(int pMax) {
-        if (pMax < 0) {
-            return cResultError;
-        } else {
-            mMaxSensor = pMax;
-            return cResultOK;
-        }
-    }
+//    public int xMaxSensor(int pMax) {
+//        if (pMax < 0) {
+//            return cResultError;
+//        } else {
+//            mMaxSensor = pMax;
+//            return cResultOK;
+//        }
+//    }
 
     public int xPeriodDark() {
         return mPeriodDark;
@@ -220,13 +220,13 @@ public class Setting {
         return cResultOK;
     }
 
-    public int xPeriod() {
-        return (mPeriodMinute * 60) + mPeriodSec;
-    }
+//    public int xPeriod() {
+//        return (mPeriodMinute * 60) + mPeriodSec;
+//    }
 
-    public int xPeriodMinute() {
-        return mPeriodMinute;
-    }
+//    public int xPeriodMinute() {
+//        return mPeriodMinute;
+//    }
 
     public int xPeriodSec() {
         return mPeriodSec;
@@ -265,9 +265,12 @@ public class Setting {
             lSetting.put(cLightOff, lLightOff);
             lSensor = new JSONObject();
             lSensor.put(cLimit, mSensorLimit);
-            lSensor.put(cTreshold, mSensorTreshold);
-            lSensor.put(cMax, mMaxSensor);
-            lPeriod = (mPeriodMinute * 60) + mPeriodSec;
+//            lSensor.put(cTreshold, mSensorTreshold);
+            lSensor.put(cTreshold, 0);
+//            lSensor.put(cMax, mMaxSensor);
+            lSensor.put(cMax, 0);
+//            lPeriod = (mPeriodMinute * 60) + mPeriodSec;
+            lPeriod = mPeriodSec;
             lSensor.put(cInterval, lPeriod);
             lSensor.put(cRepeat, mPeriodDark);
             lSetting.put(cSensor, lSensor);
@@ -284,25 +287,28 @@ public class Setting {
         mLightOffMin = 0;
         mLightOffPeriod = 30;
         mSensorLimit = 25;
-        mSensorTreshold = 2;
-        mMaxSensor = 1000;
+//        mSensorTreshold = 2;
+//        mMaxSensor = 1000;
         mPeriodDark = 3;
-        mPeriodMinute = 1;
-        mPeriodSec = 0;
+//        mPeriodMinute = 1;
+//        mPeriodSec = 0;
+        mPeriodSec = 60;
     }
 
-    public Setting(double pLongitude, double pLattitude, int pLightOffHour, int pLightOffMin, int pLightOffPeriod, int pSensorLimit, int pSensorTreshold, int pMaxSensor, int pPeriodDark, int pPeriodMinute, int pPeriodSec) {
+//    public Setting(double pLongitude, double pLattitude, int pLightOffHour, int pLightOffMin, int pLightOffPeriod, int pSensorLimit, int pSensorTreshold, int pMaxSensor, int pPeriodDark, int pPeriodMinute, int pPeriodSec) {
+    public Setting(double pLongitude, double pLattitude, int pLightOffHour, int pLightOffMin, int pLightOffPeriod, int pSensorLimit, int pPeriodDark, int pPeriodSec) {
         mLongitude = pLongitude;
         mLattitude = pLattitude;
         mLightOffHour = pLightOffHour;
         mLightOffMin = pLightOffMin;
         mLightOffPeriod = pLightOffPeriod;
         mSensorLimit = pSensorLimit;
-        mSensorTreshold = pSensorTreshold;
-        mMaxSensor = pMaxSensor;
+//        mSensorTreshold = pSensorTreshold;
+//        mMaxSensor = pMaxSensor;
         mPeriodDark = pPeriodDark;
-        mPeriodMinute = 0;
-        mPeriodSec = (pPeriodMinute * 60) + pPeriodSec;
+//        mPeriodMinute = 0;
+//        mPeriodSec = (pPeriodMinute * 60) + pPeriodSec;
+        mPeriodSec = pPeriodSec;
     }
 
     public Setting(JSONObject pSetting) {
@@ -339,10 +345,10 @@ public class Setting {
         }
 
         mSensorLimit = lSensor.optInt(cLimit);
-        mSensorTreshold = lSensor.optInt(cTreshold);
-        mMaxSensor = lSensor.optInt(cMax);
+//        mSensorTreshold = lSensor.optInt(cTreshold);
+//        mMaxSensor = lSensor.optInt(cMax);
         mPeriodSec = lSensor.optInt(cInterval);
-        mPeriodMinute = 0;
+//        mPeriodMinute = 0;
         mPeriodDark = lSensor.optInt(cRepeat);
     }
 }

@@ -67,15 +67,16 @@ public class Data {
         int lLightOffMin;
         int lLightOffPeriod;
         int lSensorLimit;
-        int lSensorTreshold;
-        int lMaxSensor;
+//        int lSensorTreshold;
+//        int lMaxSensor;
         int lPeriodDark;
-        int lPeriodMinute;
+//        int lPeriodMinute;
         int lPeriodSec;
         Statement lStm;
         ResultSet lRes;
         Setting lSetting;
-        String lSql = "SELECT Longitude, Lattitude, LightOffHour, LightOffMin, OffDuration, SensorLimit, SensorTreshold, MaxSensor, PeriodDark, PeriodMin, PeriodSec "
+//        String lSql = "SELECT Longitude, Lattitude, LightOffHour, LightOffMin, OffDuration, SensorLimit, SensorTreshold, MaxSensor, PeriodDark, PeriodMin, PeriodSec "
+        String lSql = "SELECT Longitude, Lattitude, LightOffHour, LightOffMin, OffDuration, SensorLimit, PeriodDark, PeriodSec "
                 + "FROM Setting "
                 + "WHERE ID = 'Light';";
 
@@ -92,12 +93,13 @@ public class Data {
                     lLightOffMin = lRes.getInt("LightOffMin");
                     lLightOffPeriod = lRes.getInt("OffDuration");
                     lSensorLimit = lRes.getInt("SensorLimit");
-                    lSensorTreshold = lRes.getInt("SensorTreshold");
-                    lMaxSensor = lRes.getInt("MaxSensor");
+//                    lSensorTreshold = lRes.getInt("SensorTreshold");
+//                    lMaxSensor = lRes.getInt("MaxSensor");
                     lPeriodDark = lRes.getInt("PeriodDark");
-                    lPeriodMinute = lRes.getInt("PeriodMin");
+//                    lPeriodMinute = lRes.getInt("PeriodMin");
                     lPeriodSec = lRes.getInt("PeriodSec");
-                    lSetting = new Setting(lLongitude, lLattitude, lLightOffHour, lLightOffMin, lLightOffPeriod, lSensorLimit, lSensorTreshold, lMaxSensor, lPeriodDark, lPeriodMinute, lPeriodSec);
+//                    lSetting = new Setting(lLongitude, lLattitude, lLightOffHour, lLightOffMin, lLightOffPeriod, lSensorLimit, lSensorTreshold, lMaxSensor, lPeriodDark, lPeriodMinute, lPeriodSec);
+                    lSetting = new Setting(lLongitude, lLattitude, lLightOffHour, lLightOffMin, lLightOffPeriod, lSensorLimit, lPeriodDark, lPeriodSec);
                 }
                 lRes.close();
                 lStm.close();
@@ -123,10 +125,10 @@ public class Data {
                     + "LightOffMin = '" + String.valueOf(pSetting.xLightOffMin()) + "', "
                     + "OffDuration = '" + String.valueOf(pSetting.xLightOffPeriod()) + "', "
                     + "SensorLimit = '" + String.valueOf(pSetting.xSensorLimit()) + "', "
-                    + "SensorTreshold = '" + String.valueOf(pSetting.xSensorTreshold()) + "', "
-                    + "MaxSensor = '" + String.valueOf(pSetting.xMaxSensor()) + "', "
+//                    + "SensorTreshold = '" + String.valueOf(pSetting.xSensorTreshold()) + "', "
+//                    + "MaxSensor = '" + String.valueOf(pSetting.xMaxSensor()) + "', "
                     + "SensorTreshold = '" + String.valueOf(pSetting.xPeriodDark()) + "', "
-                    + "PeriodMin = '" + String.valueOf(pSetting.xPeriodMinute()) + "', "
+//                    + "PeriodMin = '" + String.valueOf(pSetting.xPeriodMinute()) + "', "
                     + "PeriodSec = '" + String.valueOf(pSetting.xPeriodSec()) + "' "
                     + "WHERE ID = 'Light';";
             try {
@@ -147,14 +149,15 @@ public class Data {
         int lSeqNumber;
         String lName;
         boolean lActive;
-        String lType;
-        String lGroup;
-        String lPoint;
+//        String lType;
+//        String lGroup;
+//        String lPoint;
         int lPause;
         String lIP;
         Statement lStm;
         ResultSet lRes;
-        String lSql = "SELECT SeqNumber, Name, Active, Type, Grp, Point, Pause, IP "
+//        String lSql = "SELECT SeqNumber, Name, Active, Type, Grp, Point, Pause, IP "
+        String lSql = "SELECT SeqNumber, Name, Active, Pause, IP "
                 + "FROM Switch "
                 + "ORDER BY SeqNumber, Name;";
 
@@ -168,21 +171,22 @@ public class Data {
                     lSeqNumber = lRes.getInt("SeqNumber");
                     lName = lRes.getString("Name");
                     lActive = lRes.getBoolean("Active");
-                    lType = lRes.getString("Type");
-                    lGroup = lRes.getString("Grp");
-                    if (lGroup == null) {
-                        lGroup = "";
-                    }
-                    lPoint = lRes.getString("Point");
-                    if (lPoint == null) {
-                        lPoint = "";
-                    }
+//                    lType = lRes.getString("Type");
+//                    lGroup = lRes.getString("Grp");
+//                    if (lGroup == null) {
+//                        lGroup = "";
+//                    }
+//                    lPoint = lRes.getString("Point");
+//                    if (lPoint == null) {
+//                        lPoint = "";
+//                    }
                     lPause = lRes.getInt("Pause");
                     lIP = lRes.getString("IP");
                     if (lIP == null) {
                         lIP = "";
                     }
-                    lSwitch = new Switch(lSeqNumber, lName, lActive, lType, lGroup, lPoint, lPause, lIP);
+//                    lSwitch = new Switch(lSeqNumber, lName, lActive, lType, lGroup, lPoint, lPause, lIP);
+                    lSwitch = new Switch(lSeqNumber, lName, lActive, lPause, lIP);
                     lSwitches.add(lSwitch);
                 }
                 lRes.close();
@@ -201,14 +205,15 @@ public class Data {
         int lSeqNumber;
         String lName;
         boolean lActive;
-        String lType;
-        String lGroup;
-        String lPoint;
+//        String lType;
+//        String lGroup;
+//        String lPoint;
         int lPause;
         String lIP;
         Statement lStm;
         ResultSet lRes;
-        String lSql = "SELECT SeqNumber, Name, Active, Type, Grp, Point, Pause, IP "
+//        String lSql = "SELECT SeqNumber, Name, Active, Type, Grp, Point, Pause, IP "
+        String lSql = "SELECT SeqNumber, Name, Active, Pause, IP "
                 + "FROM Switch "
                 + "WHERE Name = '" + pName + "';";
 
@@ -222,21 +227,22 @@ public class Data {
                     lSeqNumber = lRes.getInt("SeqNumber");
                     lName = lRes.getString("Name");
                     lActive = lRes.getBoolean("Active");
-                    lType = lRes.getString("Type");
-                    lGroup = lRes.getString("Grp");
-                    if (lGroup == null) {
-                        lGroup = "";
-                    }
-                    lPoint = lRes.getString("Point");
-                    if (lPoint == null) {
-                        lPoint = "";
-                    }
+//                    lType = lRes.getString("Type");
+//                    lGroup = lRes.getString("Grp");
+//                    if (lGroup == null) {
+//                        lGroup = "";
+//                    }
+//                    lPoint = lRes.getString("Point");
+//                    if (lPoint == null) {
+//                        lPoint = "";
+//                    }
                     lPause = lRes.getInt("Pause");
                     lIP = lRes.getString("IP");
                     if (lIP == null) {
                         lIP = "";
                     }
-                    lSwitch = new Switch(lSeqNumber, lName, lActive, lType, lGroup, lPoint, lPause, lIP);
+//                    lSwitch = new Switch(lSeqNumber, lName, lActive, lType, lGroup, lPoint, lPause, lIP);
+                    lSwitch = new Switch(lSeqNumber, lName, lActive, lPause, lIP);
                 }
                 lRes.close();
                 lStm.close();
@@ -253,20 +259,20 @@ public class Data {
         Statement lStm;
         String lSql;
         int lActive;
-        String lGroup;
-        String lPoint;
+//        String lGroup;
+//        String lPoint;
         String lIP;
 
-        if (pSwitch.xGroup().equals("")) {
-            lGroup = "null";
-        } else {
-            lGroup = "'" + pSwitch.xGroup() + "'";
-        }
-        if (pSwitch.xPoint().equals("")) {
-            lPoint = "null";
-        } else {
-            lPoint = "'" + pSwitch.xPoint() + "'";
-        }
+//        if (pSwitch.xGroup().equals("")) {
+//            lGroup = "null";
+//        } else {
+//            lGroup = "'" + pSwitch.xGroup() + "'";
+//        }
+//        if (pSwitch.xPoint().equals("")) {
+//            lPoint = "null";
+//        } else {
+//            lPoint = "'" + pSwitch.xPoint() + "'";
+//        }
         if (pSwitch.xIP().equals("")) {
             lIP = "null";
         } else {
@@ -282,9 +288,9 @@ public class Data {
                     + "SET "
                     + "SeqNumber = '" + pSwitch.xSeqNumber() + "', "
                     + "Active = '" + lActive + "', "
-                    + "Type = '" + pSwitch.xType() + "', "
-                    + "Grp = " + lGroup + ", "
-                    + "Point = " + lPoint + ", "
+//                    + "Type = '" + pSwitch.xType() + "', "
+//                    + "Grp = " + lGroup + ", "
+//                    + "Point = " + lPoint + ", "
                     + "Pause = '" + pSwitch.xPause() + "', "
                     + "IP = " + lIP + " "
                     + "WHERE Name = '" + pSwitch.xName() + "';";
@@ -323,25 +329,25 @@ public class Data {
         Statement lStm;
         String lSql;
         int lActive;
-        String lGroup;
-        String lPoint;
-        String lIP;
+//        String lGroup;
+//        String lPoint;
+//        String lIP;
 
-        if (pSwitch.xGroup().equals("")) {
-            lGroup = "null";
-        } else {
-            lGroup = "'" + pSwitch.xGroup() + "'";
-        }
-        if (pSwitch.xPoint().equals("")) {
-            lPoint = "null";
-        } else {
-            lPoint = "'" + pSwitch.xPoint() + "'";
-        }
-        if (pSwitch.xIP().equals("")) {
-            lIP = "null";
-        } else {
-            lIP = "'" + pSwitch.xIP() + "'";
-        }
+//        if (pSwitch.xGroup().equals("")) {
+//            lGroup = "null";
+//        } else {
+//            lGroup = "'" + pSwitch.xGroup() + "'";
+//        }
+//        if (pSwitch.xPoint().equals("")) {
+//            lPoint = "null";
+//        } else {
+//            lPoint = "'" + pSwitch.xPoint() + "'";
+//        }
+//        if (pSwitch.xIP().equals("")) {
+//            lIP = "null";
+//        } else {
+//            lIP = "'" + pSwitch.xIP() + "'";
+//        }
 
         if (pSwitch.xActive()) {
             lActive = 1;
@@ -349,15 +355,17 @@ public class Data {
             lActive = 0;
         }
         if (mStatus == cOK) {
-            lSql = "INSERT INTO Switch (SeqNumber, Name, Active, Type, Grp, Point, Pause, IP) "
+//            lSql = "INSERT INTO Switch (SeqNumber, Name, Active, Type, Grp, Point, Pause, IP) "
+            lSql = "INSERT INTO Switch (SeqNumber, Name, Active, Pause, IP) "
                     + "VALUES ('" + pSwitch.xSeqNumber() + "', "
                     + "'" + pSwitch.xName() + "', "
                     + "'" + lActive + "', "
-                    + "'" + pSwitch.xType() + "', "
-                    + lGroup + ", "
-                    + lPoint + ", "
+//                    + "'" + pSwitch.xType() + "', "
+//                    + lGroup + ", "
+//                    + lPoint + ", "
                     + "'" + pSwitch.xPause() + "', "
-                    + lIP + ");";
+//                    + lIP + ");";
+                    + "'" + pSwitch.xIP() + "'" + ");";
             try {
                 lStm = mConn.createStatement();
                 lStm.executeUpdate(lSql);

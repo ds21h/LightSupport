@@ -22,7 +22,7 @@ public class Action {
     public static final String cActionNone = "None";
 
     private final int mID;
-    private ZonedDateTime mMade; 
+    private ZonedDateTime mMade;
     private ZonedDateTime mProcess;
     private final String mType;
     private final String mPar;
@@ -57,33 +57,41 @@ public class Action {
 
     public Action(int pID, String pMade, String pProcess, String pType, String pPar, boolean pReady) {
         mID = pID;
-        if (pMade == null){
+        if (pMade == null) {
             mMade = null;
         } else {
-            mMade = ZonedDateTime.parse(pMade);
+            try {
+                mMade = ZonedDateTime.parse(pMade);
+            } catch (Exception pExc) {
+                mMade = null;
+            }
         }
-        if (pProcess == null){
+        if (pProcess == null) {
             mProcess = null;
         } else {
-            mProcess = ZonedDateTime.parse(pProcess);
+            try {
+                mProcess = ZonedDateTime.parse(pProcess);
+            } catch (Exception pExc) {
+                mProcess = null;
+            }
         }
         mType = pType;
         mPar = pPar;
         mReady = pReady;
     }
 
-    public int xID(){
+    public int xID() {
         return mID;
     }
-    
-    public ZonedDateTime xMade(){
+
+    public ZonedDateTime xMade() {
         return mMade;
     }
-    
-    public ZonedDateTime xProcess(){
+
+    public ZonedDateTime xProcess() {
         return mProcess;
     }
-    
+
     public String xType() {
         return mType;
     }
@@ -91,8 +99,8 @@ public class Action {
     public String xPar() {
         return mPar;
     }
-    
-    public boolean xReady(){
+
+    public boolean xReady() {
         return mReady;
     }
 }
