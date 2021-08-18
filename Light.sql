@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 07 jun 2021 om 17:25
+-- Gegenereerd op: 10 jun 2021 om 17:02
 -- Serverversie: 10.3.27-MariaDB-0+deb10u1
 -- PHP-versie: 7.3.27-1~deb10u1
 
@@ -31,6 +31,7 @@ CREATE TABLE `Action` (
   `Created` text NOT NULL,
   `Process` text NOT NULL,
   `Type` text NOT NULL,
+  `Switch` text NOT NULL DEFAULT '',
   `Par` text NOT NULL,
   `Done` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -61,7 +62,7 @@ CREATE TABLE `Current` (
 --
 
 INSERT INTO `Current` (`SeqNr`, `ID`, `Sunset`, `StartLightOn`, `LightOff`, `UpdateTime`, `Fase`, `LightReading`) VALUES
-(1, 'Light', '2021-06-07T21:57:57+02:00[Europe/Amsterdam]', '2021-06-07T20:57:57+02:00[Europe/Amsterdam]', '2021-06-07T23:52:00+02:00[Europe/Amsterdam]', '2021-06-08T10:00:00+02:00[Europe/Amsterdam]', 1, 0);
+(1, 'Light', '2021-06-10T22:00:25+02:00[Europe/Amsterdam]', '2021-06-10T21:00:25+02:00[Europe/Amsterdam]', '2021-06-10T23:38:00+02:00[Europe/Amsterdam]', '2021-06-11T10:00:00+02:00[Europe/Amsterdam]', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,7 @@ ALTER TABLE `Current`
 -- AUTO_INCREMENT voor een tabel `Log`
 --
 ALTER TABLE `Log`
-  MODIFY `SeqNr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `SeqNr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=590;
 --
 -- AUTO_INCREMENT voor een tabel `Setting`
 --

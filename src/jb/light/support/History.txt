@@ -7,8 +7,13 @@ Version 1.0 - 03-12-2018
 Version 1.0.1 - 14-01-2019
  - Missed a Dutch name while renaming. No functional change!
 
-Version 1.1 - 07-06-2021
+Version 1.1 - 10-06-2021
  - Switched to MariaDB instead of SQLite (only change in connectionstring!)
  - Deleted obsolete attributes:
    - In Switch: Type, Group and Point
    - In Setting: SensorTreshold, MaxSensor and PeriodMin
+ - Added attribute Switch to table Action to hold the switch name. Par is now used to set 'End Retry Time'. Classes Data and Action changes accordingly.
+
+Version 1.1.1 - 18-08-2021
+ - Corrected error in xChangeSetting (copy/paste error)
+ - Synchronised with LightControl (Android) version 3.2

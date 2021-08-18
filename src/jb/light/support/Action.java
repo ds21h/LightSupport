@@ -6,6 +6,7 @@
 package jb.light.support;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Action {
     private ZonedDateTime mMade;
     private ZonedDateTime mProcess;
     private final String mType;
+    private final String mSwitch;
     private final String mPar;
     private final boolean mReady;
 
@@ -33,6 +35,7 @@ public class Action {
         mMade = ZonedDateTime.now();
         mProcess = null;
         mType = pType;
+        mSwitch = "";
         mPar = "";
         mReady = false;
     }
@@ -42,20 +45,37 @@ public class Action {
         mMade = ZonedDateTime.now();
         mProcess = null;
         mType = pType;
-        mPar = pPar;
+        if (pType.equals(cActionSwitchOn) || pType.equals(cActionSwitchOff)){
+            mSwitch = pPar;
+            mPar = "";
+        } else {
+            mSwitch = "";
+            mPar = pPar;
+        }
         mReady = false;
     }
 
-    public Action(ZonedDateTime pMoment, String pType, String pPar) {
+    public Action(ZonedDateTime pMoment, String pType, String pSwitch) {
         mID = -1;
         mMade = ZonedDateTime.now();
         mProcess = pMoment;
         mType = pType;
-        mPar = pPar;
+        mSwitch = pSwitch;
+        mPar = "";
         mReady = false;
     }
 
-    public Action(int pID, String pMade, String pProcess, String pType, String pPar, boolean pReady) {
+    public Action(ZonedDateTime pMoment, String pType, String pSwitch, ZonedDateTime pEndTime) {
+        mID = -1;
+        mMade = ZonedDateTime.now();
+        mProcess = pMoment;
+        mType = pType;
+        mSwitch = pSwitch;
+        mPar = pEndTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+        mReady = false;
+    }
+
+    public Action(int pID, String pMade, String pProcess, String pType, String pSwitch, String pPar, boolean pReady) {
         mID = pID;
         if (pMade == null) {
             mMade = null;
@@ -76,6 +96,7 @@ public class Action {
             }
         }
         mType = pType;
+        mSwitch = pSwitch;
         mPar = pPar;
         mReady = pReady;
     }
@@ -94,6 +115,10 @@ public class Action {
 
     public String xType() {
         return mType;
+    }
+
+    public String xSwitch() {
+        return mSwitch;
     }
 
     public String xPar() {
