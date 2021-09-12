@@ -3,7 +3,7 @@
 This is the support jar to be included in the applications LightSwitch and LightAPI. It holds the generic classes. Two of its classes (Setting and Switch) are also to be synchronised with the Android app LightControl.
 For an overview please see repository Lights.
 
-The project structure is that of NetBeans 8.2.
+The project structure is that of NetBeans 12.4/Maven.
 
 History:
 
