@@ -7,6 +7,10 @@ The project structure is that of NetBeans 8.2.
 
 History:
 
+Version 1.2 - 12-09-2021
+ - Upgraded to NetBeans 12.4/Maven/JDK 15
+ - Java version stays 8 because off synchronization with Android
+
 Version 1.1.1 - 18-08-2021
  - Corrected error in xChangeSetting (copy/paste error)
  - Synchronised with LightControl (Android) version 3.2
