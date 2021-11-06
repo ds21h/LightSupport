@@ -7,6 +7,10 @@ The project structure is that of NetBeans 12.4/Maven.
 
 History:
 
+Version 1.2.1 - 06-11-2011
+ - All times are now ISO_ZONED_DATE_TIME formatted
+ - Added Clean function to delete all finished actions and all log-entries before given moment 
+
 Version 1.2 - 12-09-2021
  - Upgraded to NetBeans 12.4/Maven/JDK 15
  - Java version stays 8 because off synchronization with Android

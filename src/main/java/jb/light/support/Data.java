@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,12 @@ import java.util.List;
  * @author Jan
  */
 public class Data {
+
+    public static final DateTimeFormatter StandardFormat;
+
+    static {
+        StandardFormat = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+    }
 
     private int mStatus;
     private String mText = "";
@@ -336,16 +343,16 @@ public class Data {
     public void xCurrent(Current pCurrent) {
         Statement lStm;
         String lSql;
-        DateTimeFormatter lFormat;
+//        DateTimeFormatter lFormat;
 
-        lFormat = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+//        lFormat = DateTimeFormatter.ISO_ZONED_DATE_TIME;
         if (mStatus == cOK) {
             lSql = "UPDATE Current "
                     + "SET "
-                    + "Sunset = '" + pCurrent.xSunset().format(lFormat) + "', "
-                    + "StartLightOn = '" + pCurrent.xStartLightOn().format(lFormat) + "', "
-                    + "LightOff = '" + pCurrent.xLightOff().format(lFormat) + "', "
-                    + "UpdateTime = '" + pCurrent.xUpdate().format(lFormat) + "', "
+                    + "Sunset = '" + pCurrent.xSunset().format(StandardFormat) + "', "
+                    + "StartLightOn = '" + pCurrent.xStartLightOn().format(StandardFormat) + "', "
+                    + "LightOff = '" + pCurrent.xLightOff().format(StandardFormat) + "', "
+                    + "UpdateTime = '" + pCurrent.xUpdate().format(StandardFormat) + "', "
                     + "Fase = '" + pCurrent.xFase() + "', "
                     + "LightReading = '" + pCurrent.xLightReading() + "' "
                     + "WHERE ID = 'Light';";
@@ -364,21 +371,21 @@ public class Data {
     public void xNewAction(Action pAction) {
         Statement lStm;
         String lSql;
-        DateTimeFormatter lFormat;
+//        DateTimeFormatter lFormat;
         String lMade;
         String lProcess;
 
         if (mStatus == cOK) {
-            lFormat = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+//            lFormat = DateTimeFormatter.ISO_ZONED_DATE_TIME;
             if (pAction.xMade() == null) {
                 lMade = "";
             } else {
-                lMade = pAction.xMade().format(lFormat);
+                lMade = pAction.xMade().format(StandardFormat);
             }
             if (pAction.xProcess() == null) {
                 lProcess = "";
             } else {
-                lProcess = pAction.xProcess().format(lFormat);
+                lProcess = pAction.xProcess().format(StandardFormat);
             }
 
             lSql = "INSERT INTO Action (Created, Process, Type, Switch, Par, Done) "
@@ -467,6 +474,35 @@ public class Data {
         }
     }
 
+    public void xClean(ZonedDateTime pLimit) {
+        String lLimit;
+        Statement lStm;
+        String lSql;
+
+        lLimit = pLimit.format(StandardFormat);
+
+        if (mStatus == cOK) {
+            try {
+                lSql = "DELETE from Action "
+                        + "WHERE Created < '" + lLimit + "' AND Done > 0;";
+                lStm = mConn.createStatement();
+                lStm.executeUpdate(lSql);
+                lStm.close();
+                
+                lSql = "DELETE from Log "
+                        + "WHERE Time < '" + lLimit + "';";
+                lStm = mConn.createStatement();
+                lStm.executeUpdate(lSql);
+                lStm.close();
+            } catch (SQLException ex) {
+                mStatus = cSQL_error;
+                mText = ex.getMessage();
+                xWriteLog("xClean: SQL error " + mText);
+            }
+        }
+
+    }
+
     public void xActionSwitchProcessed(Switch pSwitch) {
         Statement lStm;
         String lSql;
@@ -488,14 +524,14 @@ public class Data {
     }
 
     public final void xWriteLog(String pText) {
-        LocalDateTime lNow;
+        String lNow;
         Statement lStm;
         String lSql;
 
-        lNow = LocalDateTime.now();
+        lNow = ZonedDateTime.now().format(StandardFormat);
         if (mStatus == cOK) {
             lSql = "INSERT INTO Log (Time, Text) "
-                    + "VALUES ('" + lNow.toString() + "', '" + pText + "');";
+                    + "VALUES ('" + lNow + "', '" + pText + "');";
             try {
                 lStm = mConn.createStatement();
                 lStm.executeUpdate(lSql);
@@ -503,12 +539,12 @@ public class Data {
             } catch (SQLException ex) {
                 mStatus = cSQL_error;
                 mText = ex.getMessage();
-                System.out.println(lNow.toString() + " " + mText);
+                System.out.println(lNow + " " + mText);
             }
         } else {
-            System.out.println(lNow.toString() + " Status not OK: " + mStatus);
+            System.out.println(lNow + " Status not OK: " + mStatus);
         }
-        System.out.println(lNow.toString() + " " + pText);
+        System.out.println(lNow + " " + pText);
     }
 
     public void xClose() {

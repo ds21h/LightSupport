@@ -21,3 +21,7 @@ Version 1.1.1 - 18-08-2021
 Version 1.2 - 12-09-2021
  - Upgraded to NetBeans 12.4/Maven/JDK 15
  - Java version stays 8 because off synchronization with Android
+
+Version 1.2.1 - 06-11-2011
+ - All times are now ISO_ZONED_DATE_TIME formatted
+ - Added Clean function to delete all finished actions and all log-entries before given moment 
